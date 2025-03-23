@@ -3,11 +3,17 @@ from typing import List, Any
 
 def hello_world():
     print("Hello, World!")
+    return "Hello, World!"
     
-PROMPT = PromptTemplate(
-    input_variables=["function_name", "source_code"],
-    template="Function name: {function_name}\nSource code:\n{source_code}"
-)
+PROMPT = """\
+你是一个代码生成器，你需要根据以下要求生成代码：
+
+函数名称：{function_name}
+
+源代码：{source_code}
+
+代码解释：
+"""
 
 import inspect
 
@@ -21,9 +27,14 @@ class CustomPromptTemplate(PromptTemplate):
         # 获得源代码
         source_code = get_source_code(kwargs["function_name"])
         
+        # 获取代码解释，如果没有提供则使用默认值
+        code_explanation = kwargs.get("code_explanation", "这是一个函数的代码实现")
+        
         # 生成提示词模版
         prompt = PROMPT.format(
-            function_name=kwargs["function_name"].__name__, source_code=source_code
+            function_name=kwargs["function_name"].__name__, 
+            source_code=source_code,
+            code_explanation=code_explanation
         )
         
         return prompt
