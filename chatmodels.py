@@ -13,20 +13,22 @@ chat_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-SystemMessage(
+sy = SystemMessage(
     content="你是一个起名大师",
     additional_kwargs={"大师名字": "陈大师"}
 )
 
-HumanMessage(
+hu = HumanMessage(
     content="请问大师叫什么？",
     additional_kwargs={"大师名字": "陈大师"}
 )
 
-AIMessage(
+ai = AIMessage(
     content="我叫陈大师",
     additional_kwargs={"大师名字": "陈大师"} 
 )
+
+[sy, hu, ai]
 # 格式化模板并打印结果
 formatted_template = chat_template.format(name="陈大师", user_input="你叫什么名字？")
 print(formatted_template)
