@@ -84,24 +84,25 @@ name_prompt = PromptTemplate.from_template("你是一个{name}，请模仿示例
 # 创建起名大师的RunnableSequence
 name_chain = name_prompt | llm
 
-# 使用第一个RunnableSequence调用DeepSeek API并获取响应
-response = chain.invoke({"query": "介绍一下你自己"})
-print("自我介绍：")
-print(response)
+# test code
+# # 使用第一个RunnableSequence调用DeepSeek API并获取响应
+# response = chain.invoke({"query": "介绍一下你自己"})
+# print("自我介绍：")
+# print(response)
 
-# 使用format方法格式化提示模板，然后将格式化后的字符串传递给LLM
-formatted_prompt = name_prompt.format(name = "算命大师",country="中国特色的", boy="狗蛋", girl="翠花")
-print("使用format方法的提示：")
-print(formatted_prompt)
-response = chain.invoke(formatted_prompt)
-print("起名大师的回答：")
-print(response)
+# # 使用format方法格式化提示模板，然后将格式化后的字符串传递给LLM
+# formatted_prompt = name_prompt.format(name = "算命大师",country="中国特色的", boy="狗蛋", girl="翠花")
+# print("使用format方法的提示：")
+# print(formatted_prompt)
+# response = chain.invoke(formatted_prompt)
+# print("起名大师的回答：")
+# print(response)
 
-# 使用CommaSeparatedListOutputParser解析起名大师的回答
-parser = CommaSeparatedListOutputParser()
-name_list = parser.parse(response)
-print("格式化后的名字列表：")
-print(name_list)
+# # 使用CommaSeparatedListOutputParser解析起名大师的回答
+# parser = CommaSeparatedListOutputParser()
+# name_list = parser.parse(response)
+# print("格式化后的名字列表：")
+# print(name_list)
 
 
 

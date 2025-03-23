@@ -35,8 +35,15 @@ pm = a.format(function_name=hello_world)
 print(pm)
      
      
-#      # 和LLM连接起来
-#      from hw import DeepSeekLLM
-     
-# )
-#         return self.template.format(**kwargs)
+# 和LLM连接起来
+from hw import DeepSeekLLM
+
+# 创建DeepSeekLLM实例
+llm = DeepSeekLLM()
+
+# 创建chain对象，将自定义模板与LLM连接起来
+chain = llm
+
+# 使用chain调用LLM并获取响应
+response = chain.invoke(pm)
+print(response)
