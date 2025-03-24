@@ -37,13 +37,23 @@ pipeline_prompts = [
     ("prohibit", prohibit_prompt)
 ]
 
-# 注意：PipelinePromptTemplate已被弃用，建议使用以下替代方案：
-# my_input = {"persion": "...", "xingge": "...", "behavior_list": "...", "prohibit_list": "..."}
-# for name, prompt in pipeline_prompts:
-#     my_input[name] = prompt.invoke(my_input).to_string()
-# final_result = full_prompt.invoke(my_input)
+# 使用LangChain推荐的新方案替换已弃用的PipelinePromptTemplate
+# 准备输入数据
+my_input = {
+    "persion": "一个善良的人",
+    "xingge": "乐观开朗的性格",
+    "behavior_list": "友善待人、乐于助人",
+    "prohibit_list": "说谎、欺骗他人"
+}
 
-# 但为了保持代码兼容性，这里仍使用PipelinePromptTemplate
-pipeline_prompt = PipelinePromptTemplate(pipeline_prompts=pipeline_prompts, final_prompt=full_prompt)
+# 依次处理每个提示模板
+for name, prompt in pipeline_prompts:
+    # 使用invoke方法处理每个模板，并将结果转换为字符串
+    my_input[name] = prompt.invoke(my_input).to_string()
 
-pipeline_prompt.input_variables
+# 使用full_prompt处理最终的组合结果
+final_result = full_prompt.invoke(my_input)
+
+# 打印最终结果
+print("\n最终生成的提示词：")
+print(final_result.to_string())
